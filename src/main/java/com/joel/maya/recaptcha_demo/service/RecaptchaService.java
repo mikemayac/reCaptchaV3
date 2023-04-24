@@ -49,7 +49,7 @@ public class RecaptchaService {
     public boolean isResponseValid(String recaptchaResponse) { //verify()
         RestTemplate restTemplate = new RestTemplate();
         String apiUrl = "https://www.google.com/recaptcha/api/siteverify";
-        String secretKey = recaptchaConfig.getSecretKey();
+        String secretKey = recaptchaConfig.getRecaptchaSecretKey();
 
         Map<String, String> params = new HashMap<>();
         params.put("secret", secretKey);

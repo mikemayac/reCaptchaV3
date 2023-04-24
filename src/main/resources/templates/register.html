@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+
+    <script th:src="'https://www.google.com/recaptcha/api.js?render=' + ${recaptchaSiteKey}"></script>
+    <script th:inline="javascript">
+        function onSubmit(token) {
+            document.getElementById("register-form").submit();
+        }
+
+        /*
+        Cuando el usuario envía el formulario, se llama a la función validateForm() que obtiene el token de reCaptcha
+        y lo asigna al campo oculto g-recaptcha-response. Luego, se envía el formulario al controlador.
+        */
+        function validateForm(event) {
+            event.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('${recaptchaSiteKey}', {action: 'register'}).then(function(token) {
+                    document.getElementById('g-recaptcha-response').value = token;
+                    onSubmit(token);
+                });
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <h1>Registro</h1>
+    <form id="register-form" th:action="@{/register}" th:method="post" onsubmit="validateForm(event)">
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+        <input type="text" name="username" placeholder="Nombre de usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <input type="password" name="password2" placeholder="Repetir contraseña" required>
+        <input type="submit" value="Registrarse">
+        <button type="submit">Registrarse</button>
+    </form>
+    <a href="/login">Iniciar sesión</a>
+
+</body>
+</html>

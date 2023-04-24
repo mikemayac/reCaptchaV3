@@ -29,22 +29,22 @@ public class RecaptchaConfig {
      * para generar el token de reCaptcha.
      */
     @Value("${recaptcha.site-key}")
-    private String siteKey;
+    private String recaptchaSiteKey;
 
     /**
      * La clave secreta para reCaptcha, utilizada en el lado del servidor
      * para validar el token de reCaptcha.
      */
     @Value("${recaptcha.secret-key}")
-    private String secretKey;
+    private String recaptchaSecretKey;
 
     /**
      * Obtiene la clave del sitio para reCaptcha.
      *
      * @return la clave del sitio
      */
-    public String getSiteKey(){
-        return siteKey;
+    public String getRecaptchaSiteKey(){
+        return recaptchaSiteKey;
     }
 
     /**
@@ -52,7 +52,7 @@ public class RecaptchaConfig {
      *
      * @return la clave secreta
      */
-    public String getSecretKey(){
-        return secretKey;
+    public String getRecaptchaSecretKey(){
+        return recaptchaSecretKey;
     }
 }

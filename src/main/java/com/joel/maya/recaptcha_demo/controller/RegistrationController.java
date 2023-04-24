@@ -1,6 +1,7 @@
 package com.joel.maya.recaptcha_demo.controller;
 
 import com.joel.maya.recaptcha_demo.service.RecaptchaService;
+import com.joel.maya.recaptcha_demo.config.RecaptchaConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegistrationController {
 
     private final RecaptchaService recaptchaService;
+    private final RecaptchaConfig recaptchaConfig;
 
     /**
      * Constructor de la clase RegistrationController.
@@ -26,8 +28,9 @@ public class RegistrationController {
      * @param recaptchaService el servicio de reCaptcha.
      */
     @Autowired
-    public RegistrationController(RecaptchaService recaptchaService) {
+    public RegistrationController(RecaptchaService recaptchaService, RecaptchaConfig recaptchaConfig) {
         this.recaptchaService = recaptchaService;
+        this.recaptchaConfig = recaptchaConfig;
     }
 
     /**
@@ -40,6 +43,7 @@ public class RegistrationController {
     public String showRegistrationForm(Model model) {
         // Realiza cualquier acción necesaria antes de mostrar el formulario de registro
         // Por ejemplo, añadir atributos al modelo de la vista.
+        model.addAttribute("recaptchaSiteKey", recaptchaConfig.getRecaptchaSiteKey());
         return "register";
     }
 
