@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script th:src="'https://www.google.com/recaptcha/api.js?render=' + ${recaptchaSiteKey}"></script>
     <script th:inline="javascript">
         function onSubmit(token) {
@@ -19,7 +18,7 @@
         function validateForm(event) {
             event.preventDefault();
             grecaptcha.ready(function() {
-                grecaptcha.execute('${recaptchaSiteKey}', {action: 'register'}).then(function(token) {
+                grecaptcha.execute('6LfG-bAlAAAAAPnnqeB-5C-G-OTsjwghx1M9MvoH', {action: 'register'}).then(function(token) {
                     document.getElementById('g-recaptcha-response').value = token;
                     onSubmit(token);
                 });
