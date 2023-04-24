@@ -5,8 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registro</title>
-
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script th:src="'https://www.google.com/recaptcha/api.js?render=' + ${recaptchaSiteKey}"></script>
     <script th:inline="javascript">
         function onSubmit(token) {
@@ -36,7 +35,6 @@
         <input type="text" name="username" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <input type="password" name="password2" placeholder="Repetir contraseña" required>
-        <input type="submit" value="Registrarse">
         <button type="submit">Registrarse</button>
     </form>
     <a href="/login">Iniciar sesión</a>
