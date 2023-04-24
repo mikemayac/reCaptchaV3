@@ -40,13 +40,10 @@ public class RecaptchaService {
     /**
      * Verifica si una respuesta de reCaptcha es válida.
      *
-     * El método isResponseValid() toma la respuesta de reCaptcha generada en el lado del cliente como argumento y se
-     * comunica con la API de reCaptcha de Google para verificar si la respuesta es válida.
-     *
      * @param recaptchaResponse la respuesta de reCaptcha generada en el lado del cliente.
-     * @return true si la respuesta es válida, false en caso contrario.
+     * @return RecaptchaValidationResult con información sobre la validación y la puntuación obtenida.
      */
-    public boolean isResponseValid(String recaptchaResponse) { //verify()
+    public RecaptchaValidationResult validateResponse(String recaptchaResponse) {
         RestTemplate restTemplate = new RestTemplate();
         String apiUrl = "https://www.google.com/recaptcha/api/siteverify";
         String secretKey = recaptchaConfig.getRecaptchaSecretKey();
@@ -56,12 +53,39 @@ public class RecaptchaService {
         params.put("response", recaptchaResponse);
 
         ResponseEntity<RecaptchaValidationResponse> response = restTemplate.postForEntity(apiUrl, params, RecaptchaValidationResponse.class);
+        RecaptchaValidationResult validationResult = new RecaptchaValidationResult();
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody().isSuccess();
+            validationResult.setSuccess(response.getBody().isSuccess());
+            validationResult.setScore(response.getBody().getScore());
         } else {
             // Manejar errores de comunicación con la API de reCaptcha
-            return false;
+            validationResult.setSuccess(false);
+            validationResult.setScore(0);
+        }
+
+        return validationResult;
+    }
+
+    // Clase para almacenar el resultado de la validación de reCAPTCHA
+    public static class RecaptchaValidationResult {
+        private boolean success;
+        private float score;
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public void setSuccess(boolean success) {
+            this.success = success;
+        }
+
+        public float getScore() {
+            return score;
+        }
+
+        public void setScore(float score) {
+            this.score = score;
         }
     }
 }

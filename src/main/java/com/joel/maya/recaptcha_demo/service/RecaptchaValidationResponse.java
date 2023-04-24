@@ -16,6 +16,9 @@ public class RecaptchaValidationResponse {
     @JsonProperty("success")
     private boolean success;
 
+    @JsonProperty("score")
+    private float score;
+
     // ... podemos añadir otros campos de la respuesta de reCapctha si son necesarios.
 
     /**
@@ -32,6 +35,22 @@ public class RecaptchaValidationResponse {
      */
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    /**
+     * Devuelve la puntuación obtenida en la validación de reCaptcha.
+     * @return la puntuación obtenida en la validación de reCaptcha.
+     */
+    public float getScore() {
+        return score;
+    }
+
+    /**
+     * Establece la puntuación obtenida en la validación de reCaptcha.
+     * @param score la puntuación obtenida en la validación de reCaptcha.
+     */
+    public void setScore(float score) {
+        this.score = score;
     }
 
     // ... getters y setters para otros campos de la respuesta de reCapctha si son necesarios.

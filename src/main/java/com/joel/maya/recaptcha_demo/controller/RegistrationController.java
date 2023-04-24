@@ -59,9 +59,11 @@ public class RegistrationController {
     @PostMapping("/register")
     public String processRegistration(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse, Model model) {
         // Valida la respuesta de reCaptcha
-        if (!recaptchaService.isResponseValid(recaptchaResponse)) {
+        RecaptchaService.RecaptchaValidationResult validationResult = recaptchaService.validateResponse(recaptchaResponse);
+        if (!validationResult.isSuccess()) {
             // Maejar el caso cuando la validacion de reCaptcha falla
-            model.addAttribute("error", "La validación de reCaptcha falló. Por favor, inténtelo de nuevo.");
+            model.addAttribute("error", "La validación de reCaptcha falló con una puntuación de" +
+                    +validationResult.getScore()+ " Por favor, inténtelo de nuevo.");
             return "register";
         }
         // Procesa el registro (guarda el usuario, envía correo electrónico de confirmación, etc.)

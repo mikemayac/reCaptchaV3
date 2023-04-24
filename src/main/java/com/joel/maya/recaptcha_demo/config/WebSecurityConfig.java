@@ -33,11 +33,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .requestMatchers("/register","/login").permitAll()
+                .requestMatchers("/resources/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/register")
                 .permitAll()
                 .and()
             .logout()
