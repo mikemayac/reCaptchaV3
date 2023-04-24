@@ -1,5 +1,15 @@
 package com.joel.maya.recaptcha_demo.config;
 
+/**
+ * La clase RecaptchaConfig se utilizará para almacenar las propiedades de reCaptcha,
+ * como la clave del sitio y la clave secreta, que se utilizarán para interactuar con el servicio de reCaptcha.
+ * Utilizaremos la característica de inyección de propiedades de Spring para cargar estas propiedades desde el archivo de
+ * configuración application.properties
+ *
+ * @author Joel Maya
+ * @version 1.0
+ */
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * Clase de configuración para almacenar las propiedades de reCaptcha.
  *
  * Esta clase se encarga de cargar las propiedades de reCaptcha desde el archivo
- * de configuración (application.properties) y ponerlas a disposición de los componentes de la aplicación
+ * de configuración y ponerlas a disposición de los componentes de la aplicación
  * que necesitan interactuar con el servicio de reCaptcha.
  */
 
