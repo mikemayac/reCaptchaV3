@@ -1,4 +1,4 @@
-package com.joel.maya.recaptchaexample;
+package com.joel.maya.recaptcha_demo;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
