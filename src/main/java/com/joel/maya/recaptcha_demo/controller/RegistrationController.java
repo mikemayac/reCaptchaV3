@@ -22,6 +22,7 @@ public class RegistrationController {
 
     /**
      * Constructor de la clase RegistrationController.
+     * Inyectamos la clase RecaptchaService para realizar la validación de reCaptcha.
      * @param recaptchaService el servicio de reCaptcha.
      */
     @Autowired
@@ -44,6 +45,8 @@ public class RegistrationController {
 
     /**
      * Maneja las solicitudes POST para la página de registro. (al endpint de registro)
+     * valida el token de reCaptcha utilizando el servicio RecaptchaService y, si la validación es exitosa, procesa el
+     * registro y redirige a la página de éxito. En caso contrario, muestra un mensaje de error en la página de registro.
      *
      * @param recaptchaResponse la respuesta de reCaptcha generada en el lado del cliente.
      * @param model el modelo de la vista.
